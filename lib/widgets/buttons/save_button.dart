@@ -3,35 +3,41 @@ import 'package:tasks/pages/home_page.dart';
 import 'package:tasks/theme.dart';
 
 class SaveButton extends StatelessWidget {
-  SaveButton(this.onEmptyChanged, this.filled);
+  SaveButton(
+    this.onEmptyChanged,
+    this.filled,
+    this.titleController,
+    this.descriptionController,
+  );
 
   final void Function(bool empty) onEmptyChanged;
   final bool filled;
+  final TextEditingController titleController;
+  final TextEditingController descriptionController;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(foregroundColor: filled ? blue : Colors.grey),
-      onPressed: () => filled ? saveToDo(context, onEmptyChanged) : null,
+      onPressed: () => filled
+          ? saveToDo(
+              context,
+              onEmptyChanged,
+              titleController,
+              descriptionController,
+            )
+          : null,
       child: Text('저장'),
     );
   }
 }
 
-saveToDo(context, onEmptyChanged) {
+saveToDo(context, onEmptyChanged, titleController, descriptionController) {
   list.add(
     ToDoEntity(
-      title: "새로운 할 일 1",
-      description: "세부 내용은 다음과 같습니다\n\n세부 내용은 여기에 작성합니다.",
+      title: titleController.text,
+      description: descriptionController.text,
       isFavorite: false,
-      isDone: true,
-    ),
-  );
-  list.add(
-    ToDoEntity(
-      title: "새로운 할 일 2",
-      description: "세부 내용은 다음과 같습니다\n\n세부 내용은 여기에 작성합니다.",
-      isFavorite: true,
       isDone: false,
     ),
   );

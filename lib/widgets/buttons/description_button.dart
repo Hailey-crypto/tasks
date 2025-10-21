@@ -23,11 +23,22 @@ class _DescriptionButtonState extends State<DescriptionButton> {
   }
 }
 
-Widget DescriptionField(BuildContext context, onEmptyChanged) {
+Widget DescriptionField(
+  BuildContext context,
+  onEmptyChanged,
+  titleController,
+  descriptionController,
+) {
   return TextField(
+    controller: descriptionController,
     style: TextStyle(fontSize: 14),
     maxLines: 5,
-    onSubmitted: (value) => saveToDo(context, onEmptyChanged),
+    onSubmitted: (value) => saveToDo(
+      context,
+      onEmptyChanged,
+      titleController.text,
+      descriptionController.text,
+    ),
     decoration: InputDecoration(hintText: '세부정보 추가'),
   );
 }
