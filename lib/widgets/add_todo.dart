@@ -1,0 +1,119 @@
+import 'package:flutter/material.dart';
+import 'package:tasks/widgets/buttons/description_button.dart';
+import 'package:tasks/widgets/buttons/favorite_button.dart';
+import 'package:tasks/widgets/buttons/save_button.dart';
+
+class AddToDo extends StatelessWidget {
+  AddToDo(this.empty, this.onEmptyChanged);
+
+  final bool empty;
+  final void Function(bool empty) onEmptyChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: SizedBox(
+        width: double.infinity,
+        child: Stack(
+          children: [
+            Align(
+              alignment: AlignmentGeometry.xy(0.8, 0.8),
+              child: FloatingActionButton(
+                onPressed: () => addToDo(context, empty, onEmptyChanged),
+                child: Icon(Icons.add, color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+addToDo(context, empty, onEmptyChanged) {
+  return showModalBottomSheet(
+    isScrollControlled: true,
+    context: context,
+    builder: (context) => AddBottomSheet(empty, onEmptyChanged),
+  );
+}
+
+class AddBottomSheet extends StatefulWidget {
+  AddBottomSheet(this.empty, this.onEmptyChanged);
+
+  final bool empty;
+  final void Function(bool empty) onEmptyChanged;
+
+  @override
+  State<AddBottomSheet> createState() => _AddBottomSheetState();
+}
+
+class _AddBottomSheetState extends State<AddBottomSheet> {
+  bool spread = false;
+  void onSpreadChanged(bool newSpread) {
+    setState(() => spread = newSpread);
+  }
+
+  final TextEditingController titleController = TextEditingController();
+  bool filled = false;
+  @override
+  void initState() {
+    super.initState();
+    titleController.addListener(() {
+      setState(() {
+        filled = titleController.text.isNotEmpty;
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return StatefulBuilder(
+      builder: (BuildContext context, StateSetter setState) {
+        return SingleChildScrollView(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+            top: 12,
+            left: 20,
+            right: 20,
+          ),
+          child: Column(
+            children: [
+              TextField(
+                controller: titleController,
+                autofocus: true,
+                onSubmitted: (value) {
+                  titleController.text.isEmpty
+                      ? snackBar(context)
+                      : saveToDo(context, widget.onEmptyChanged);
+                },
+                decoration: InputDecoration(
+                  hintStyle: TextStyle(fontSize: 16),
+                  hintText: '새 할 일',
+                ),
+              ),
+              spread
+                  ? DescriptionField(context, widget.onEmptyChanged)
+                  : SizedBox.shrink(),
+              Row(
+                children: [
+                  DescriptionButton(spread, onSpreadChanged),
+                  FavoriteButton(),
+                  Spacer(),
+                  SaveButton(widget.onEmptyChanged, filled),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+/*
+widgets
+-  description_button ) DescriptionButton, DescriptionField
+-  favorite_button ) FavoriteButton
+-  save_button ) SaveButton, saveToDo(), snackBar()
+*/
