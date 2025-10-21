@@ -23,8 +23,8 @@ class SaveButton extends StatelessWidget {
           ? saveToDo(
               context,
               onEmptyChanged,
-              titleController.text,
-              descriptionController.text,
+              titleController,
+              descriptionController,
             )
           : null,
       child: Text('저장'),
@@ -32,20 +32,12 @@ class SaveButton extends StatelessWidget {
   }
 }
 
-saveToDo(context, onEmptyChanged, newTitle, newDescription) {
+saveToDo(context, onEmptyChanged, titleController, descriptionController) {
   list.add(
     ToDoEntity(
-      title: newTitle,
-      description: newDescription,
+      title: titleController.text,
+      description: descriptionController.text,
       isFavorite: false,
-      isDone: true,
-    ),
-  );
-  list.add(
-    ToDoEntity(
-      title: "새로운 할 일 2",
-      description: "세부 내용은 다음과 같습니다\n\n세부 내용은 여기에 작성합니다.",
-      isFavorite: true,
       isDone: false,
     ),
   );
