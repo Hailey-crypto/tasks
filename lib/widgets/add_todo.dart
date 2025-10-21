@@ -54,7 +54,10 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
     setState(() => spread = newSpread);
   }
 
+  // TextField 입력값 받기
   final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+
   bool filled = false;
   @override
   void initState() {
@@ -85,7 +88,12 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                 onSubmitted: (value) {
                   titleController.text.isEmpty
                       ? snackBar(context)
-                      : saveToDo(context, widget.onEmptyChanged);
+                      : saveToDo(
+                          context,
+                          widget.onEmptyChanged,
+                          titleController,
+                          descriptionController,
+                        );
                 },
                 decoration: InputDecoration(
                   hintStyle: TextStyle(fontSize: 16),
@@ -93,14 +101,24 @@ class _AddBottomSheetState extends State<AddBottomSheet> {
                 ),
               ),
               spread
-                  ? DescriptionField(context, widget.onEmptyChanged)
+                  ? DescriptionField(
+                      context,
+                      widget.onEmptyChanged,
+                      titleController,
+                      descriptionController,
+                    )
                   : SizedBox.shrink(),
               Row(
                 children: [
                   DescriptionButton(spread, onSpreadChanged),
                   FavoriteButton(),
                   Spacer(),
-                  SaveButton(widget.onEmptyChanged, filled),
+                  SaveButton(
+                    widget.onEmptyChanged,
+                    filled,
+                    titleController,
+                    descriptionController,
+                  ),
                 ],
               ),
             ],
