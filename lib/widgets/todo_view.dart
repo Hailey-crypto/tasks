@@ -18,6 +18,11 @@ class ToDoEntity {
 List<ToDoEntity> list = [];
 
 class ToDoView extends StatefulWidget {
+  ToDoView(this.empty, this.onEmptyChanged);
+
+  final bool empty;
+  final void Function(bool empty) onEmptyChanged;
+
   @override
   State<ToDoView> createState() => _ToDoViewState();
 }
@@ -35,6 +40,11 @@ class _ToDoViewState extends State<ToDoView> {
             description: todo.description,
             isFavorite: todo.isFavorite,
             isDone: todo.isDone,
+            index: index,
+            onDelete: () {
+              setState(() {});
+              widget.onEmptyChanged(list.isEmpty);
+            },
           );
         },
       ),
