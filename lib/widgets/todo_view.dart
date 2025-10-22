@@ -12,7 +12,7 @@ class ToDoEntity {
   final String title;
   final String? description;
   bool isFavorite;
-  final bool isDone;
+  bool isDone;
 }
 
 List<ToDoEntity> list = [];
@@ -48,6 +48,11 @@ class _ToDoViewState extends State<ToDoView> {
             onFavoriteChanged: () {
               setState(() {
                 list[index].isFavorite = !list[index].isFavorite;
+              });
+            },
+            onDoneChanged: () {
+              setState(() {
+                list[index].isDone = !list[index].isDone;
               });
             },
           );

@@ -13,6 +13,7 @@ class ToDoBox extends StatefulWidget {
     required this.index,
     required this.onDeleted,
     required this.onFavoriteChanged,
+    required this.onDoneChanged,
   });
 
   final String title;
@@ -22,17 +23,13 @@ class ToDoBox extends StatefulWidget {
   final int index;
   final void Function() onDeleted;
   final void Function() onFavoriteChanged;
+  final void Function() onDoneChanged;
 
   @override
   State<ToDoBox> createState() => _ToDoBoxState();
 }
 
 class _ToDoBoxState extends State<ToDoBox> {
-  bool isDone = false;
-  void onDoneChanged(bool newDone) {
-    setState(() => isDone = newDone);
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -65,12 +62,12 @@ class _ToDoBoxState extends State<ToDoBox> {
         child: Row(
           spacing: 12,
           children: [
-            DoneButton(isDone, onDoneChanged),
+            DoneButton(widget.isDone, widget.onDoneChanged),
             Text(
               widget.title,
               style: TextStyle(
                 fontSize: 16,
-                decoration: isDone
+                decoration: widget.isDone
                     ? TextDecoration.lineThrough
                     : TextDecoration.none,
               ),
