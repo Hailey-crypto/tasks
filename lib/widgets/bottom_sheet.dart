@@ -19,6 +19,11 @@ class _BottomSheetState extends State<BottomSheet> {
     setState(() => spread = newSpread);
   }
 
+  bool isFavorite = false;
+  void onFavoriteChanged() {
+    setState(() => isFavorite = !isFavorite);
+  }
+
   // TextField 입력값 받기
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
@@ -58,6 +63,7 @@ class _BottomSheetState extends State<BottomSheet> {
                           widget.onEmptyChanged,
                           titleController,
                           descriptionController,
+                          isFavorite,
                         );
                 },
                 decoration: InputDecoration(
@@ -71,18 +77,20 @@ class _BottomSheetState extends State<BottomSheet> {
                       widget.onEmptyChanged,
                       titleController,
                       descriptionController,
+                      isFavorite,
                     )
                   : SizedBox.shrink(),
               Row(
                 children: [
                   DescriptionButton(spread, onSpreadChanged),
-                  FavoriteButton(),
+                  FavoriteButton(isFavorite, onFavoriteChanged),
                   Spacer(),
                   SaveButton(
                     widget.onEmptyChanged,
                     filled,
                     titleController,
                     descriptionController,
+                    isFavorite,
                   ),
                 ],
               ),

@@ -41,9 +41,14 @@ class _ToDoViewState extends State<ToDoView> {
             isFavorite: todo.isFavorite,
             isDone: todo.isDone,
             index: index,
-            onDelete: () {
+            onDeleted: () {
               setState(() {});
               widget.onEmptyChanged(list.isEmpty);
+            },
+            onFavoriteChanged: () {
+              setState(() {
+                list[index].isFavorite = !list[index].isFavorite;
+              });
             },
           );
         },
