@@ -19,33 +19,42 @@ class ToDoDetailPage extends StatefulWidget {
 }
 
 class _ToDoDetailPageState extends State<ToDoDetailPage> {
+  late bool localFavorite = widget.isFavorite;
+
+  void onLocalFavoriteChanged() {
+    setState(() {
+      localFavorite = !localFavorite;
+    });
+    widget.onFavoriteChanged();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
-        actions: [FavoriteButton(widget.isFavorite, widget.onFavoriteChanged)],
+        actions: [FavoriteButton(localFavorite, onLocalFavoriteChanged)],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 10,
-          children: [TitleBox(widget.title), DetailBox(widget.description)],
+          children: [titleBox(widget.title), detailBox(widget.description)],
         ),
       ),
     );
   }
 }
 
-Widget TitleBox(title) {
+Widget titleBox(title) {
   return Text(
     title,
     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
   );
 }
 
-Widget DetailBox(description) {
+Widget detailBox(description) {
   return Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     spacing: 10,
