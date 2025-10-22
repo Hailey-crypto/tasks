@@ -1,26 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:tasks/pages/home_page.dart';
 import 'package:tasks/pages/todo_detail_page.dart';
 import 'package:tasks/widgets/buttons/done_button.dart';
 import 'package:tasks/widgets/buttons/favorite_button.dart';
 
-class ToDoView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(child: ListView(children: todoList));
-  }
+class ToDoEntity {
+  ToDoEntity({
+    required this.title,
+    required this.description,
+    required this.isFavorite,
+    required this.isDone,
+  });
+
+  final String title;
+  final String? description;
+  bool isFavorite;
+  final bool isDone;
 }
 
-List<ToDoBox> todoList = list
-    .map(
-      (todo) => ToDoBox(
-        title: todo.title,
-        description: todo.description,
-        isFavorite: todo.isFavorite,
-        isDone: todo.isDone,
+List<ToDoEntity> list = [];
+
+class ToDoView extends StatefulWidget {
+  @override
+  State<ToDoView> createState() => _ToDoViewState();
+}
+
+class _ToDoViewState extends State<ToDoView> {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          final todo = list[index];
+          return ToDoBox(
+            title: todo.title,
+            description: todo.description,
+            isFavorite: todo.isFavorite,
+            isDone: todo.isDone,
+          );
+        },
       ),
-    )
-    .toList();
+    );
+  }
+}
 
 class ToDoBox extends StatefulWidget {
   const ToDoBox({
