@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tasks/pages/todo_detail_page.dart';
 import 'package:tasks/widgets/buttons/done_button.dart';
 import 'package:tasks/widgets/buttons/favorite_button.dart';
+import 'package:tasks/widgets/delete_dialog.dart';
 
 class ToDoBox extends StatefulWidget {
   const ToDoBox({
@@ -9,12 +10,16 @@ class ToDoBox extends StatefulWidget {
     required this.description,
     required this.isFavorite,
     required this.isDone,
+    required this.index,
+    required this.onDelete,
   });
 
   final String title;
   final String? description;
   final bool isFavorite;
   final bool isDone;
+  final int index;
+  final void Function() onDelete;
 
   @override
   State<ToDoBox> createState() => _ToDoBoxState();
@@ -29,6 +34,8 @@ class _ToDoBoxState extends State<ToDoBox> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onLongPress: () =>
+          deleteDialog(context, widget.title, widget.index, widget.onDelete),
       onTap: () {
         Navigator.push(
           context,
@@ -72,6 +79,7 @@ class _ToDoBoxState extends State<ToDoBox> {
 
 /*
 widgets
--  done_button ) DoneButton
--  favorite_button ) FavoriteButton
+- delete_dialog) deleteDialog(), deleteToDo()
+- done_button ) DoneButton
+- favorite_button ) FavoriteButton
 */
