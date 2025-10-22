@@ -60,8 +60,3 @@ class _ToDoViewState extends State<ToDoView> {
     );
   }
 }
-
-/*
-widgets
-- todo_box ) ToDoBox
-*/

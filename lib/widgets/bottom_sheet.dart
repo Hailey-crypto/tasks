@@ -104,10 +104,3 @@ class _BottomSheetState extends State<BottomSheet> {
     );
   }
 }
-
-/*
-widgets
--  description_button ) DescriptionButton, DescriptionField
--  favorite_button ) FavoriteButton
--  save_button ) SaveButton, saveToDo(), snackBar()
-*/
