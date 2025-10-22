@@ -3,22 +3,6 @@ import '../widgets/no_todo.dart';
 import '../widgets/todo_view.dart';
 import 'package:tasks/widgets/add_todo.dart';
 
-class ToDoEntity {
-  ToDoEntity({
-    required this.title,
-    required this.description,
-    required this.isFavorite,
-    required this.isDone,
-  });
-
-  final String title;
-  final String? description;
-  bool isFavorite;
-  final bool isDone;
-}
-
-List<ToDoEntity> list = [];
-
 class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
@@ -53,6 +37,6 @@ class _HomePageState extends State<HomePage> {
 /*
 widgets
 -  no_todo ) NoToDo
--  todo_view ) ToDoView
+-  todo_view ) ToDoView, list
 -  add_todo ) AddToDo
 */
