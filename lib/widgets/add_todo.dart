@@ -9,17 +9,16 @@ class AddToDo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Padding(
+      padding: EdgeInsets.all(20),
       child: SizedBox(
         width: double.infinity,
-        child: Stack(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Align(
-              alignment: AlignmentGeometry.xy(0.8, 0.8),
-              child: FloatingActionButton(
-                onPressed: () => addToDo(context, empty, onEmptyChanged),
-                child: Icon(Icons.add, color: Colors.white),
-              ),
+            FloatingActionButton(
+              onPressed: () => addToDo(context, empty, onEmptyChanged),
+              child: Icon(Icons.add, color: Colors.white),
             ),
           ],
         ),
