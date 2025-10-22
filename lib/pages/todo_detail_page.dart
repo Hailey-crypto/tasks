@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:tasks/widgets/buttons/favorite_button.dart';
 
 class ToDoDetailPage extends StatefulWidget {
-  ToDoDetailPage(this.title, this.description);
+  ToDoDetailPage(
+    this.title,
+    this.description,
+    this.isFavorite,
+    this.onFavoriteChanged,
+  );
 
   final String title;
   final String? description;
+  final bool isFavorite;
+  final void Function() onFavoriteChanged;
 
   @override
   State<ToDoDetailPage> createState() => _ToDoDetailPageState();
@@ -15,7 +22,10 @@ class _ToDoDetailPageState extends State<ToDoDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(leading: BackButton(), actions: [FavoriteButton()]),
+      appBar: AppBar(
+        leading: BackButton(),
+        actions: [FavoriteButton(widget.isFavorite, widget.onFavoriteChanged)],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(

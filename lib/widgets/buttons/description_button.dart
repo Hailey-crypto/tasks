@@ -28,6 +28,7 @@ Widget DescriptionField(
   onEmptyChanged,
   titleController,
   descriptionController,
+  isFavorite,
 ) {
   return TextField(
     controller: descriptionController,
@@ -38,6 +39,7 @@ Widget DescriptionField(
       onEmptyChanged,
       titleController.text,
       descriptionController.text,
+      isFavorite,
     ),
     decoration: InputDecoration(hintText: '세부정보 추가'),
   );

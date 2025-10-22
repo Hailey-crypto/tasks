@@ -8,12 +8,14 @@ class SaveButton extends StatelessWidget {
     this.filled,
     this.titleController,
     this.descriptionController,
+    this.isFavorite,
   );
 
   final void Function(bool empty) onEmptyChanged;
   final bool filled;
   final TextEditingController titleController;
   final TextEditingController descriptionController;
+  final bool isFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class SaveButton extends StatelessWidget {
               onEmptyChanged,
               titleController,
               descriptionController,
+              isFavorite,
             )
           : null,
       child: Text('저장'),
@@ -32,12 +35,18 @@ class SaveButton extends StatelessWidget {
   }
 }
 
-saveToDo(context, onEmptyChanged, titleController, descriptionController) {
+saveToDo(
+  context,
+  onEmptyChanged,
+  titleController,
+  descriptionController,
+  isFavorite,
+) {
   list.add(
     ToDoEntity(
       title: titleController.text,
       description: descriptionController.text,
-      isFavorite: false,
+      isFavorite: isFavorite,
       isDone: false,
     ),
   );

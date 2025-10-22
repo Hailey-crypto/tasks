@@ -11,7 +11,8 @@ class ToDoBox extends StatefulWidget {
     required this.isFavorite,
     required this.isDone,
     required this.index,
-    required this.onDelete,
+    required this.onDeleted,
+    required this.onFavoriteChanged,
   });
 
   final String title;
@@ -19,7 +20,8 @@ class ToDoBox extends StatefulWidget {
   final bool isFavorite;
   final bool isDone;
   final int index;
-  final void Function() onDelete;
+  final void Function() onDeleted;
+  final void Function() onFavoriteChanged;
 
   @override
   State<ToDoBox> createState() => _ToDoBoxState();
@@ -35,13 +37,18 @@ class _ToDoBoxState extends State<ToDoBox> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () =>
-          deleteDialog(context, widget.title, widget.index, widget.onDelete),
+          deleteDialog(context, widget.title, widget.index, widget.onDeleted),
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return ToDoDetailPage(widget.title, widget.description);
+              return ToDoDetailPage(
+                widget.title,
+                widget.description,
+                widget.isFavorite,
+                widget.onFavoriteChanged,
+              );
             },
           ),
         );
@@ -69,7 +76,7 @@ class _ToDoBoxState extends State<ToDoBox> {
               ),
             ),
             Spacer(),
-            FavoriteButton(),
+            FavoriteButton(widget.isFavorite, widget.onFavoriteChanged),
           ],
         ),
       ),
