@@ -72,9 +72,3 @@ Widget detailBox(description) {
     ],
   );
 }
-
-/*
-widgets
-- back_button ) BackButton
-- favorite_button ) FavoriteButton
-*/

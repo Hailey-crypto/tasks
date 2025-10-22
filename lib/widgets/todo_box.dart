@@ -87,10 +87,3 @@ class _ToDoBoxState extends State<ToDoBox> {
     );
   }
 }
-
-/*
-widgets
-- delete_dialog) deleteDialog(), deleteToDo()
-- done_button ) DoneButton
-- favorite_button ) FavoriteButton
-*/

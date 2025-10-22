@@ -35,8 +35,3 @@ addToDo(context, empty, onEmptyChanged) {
     builder: (context) => BottomSheet(empty, onEmptyChanged),
   );
 }
-
-/*
-widgets
-- bottom_sheet ) BottomSheet
-*/

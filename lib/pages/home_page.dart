@@ -37,10 +37,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-/*
-widgets
--  no_todo ) NoToDo
--  todo_view ) ToDoView, list
--  add_todo ) AddToDo
-*/
