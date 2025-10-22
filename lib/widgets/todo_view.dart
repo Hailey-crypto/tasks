@@ -15,10 +15,10 @@ class ToDoEntity {
   bool isDone;
 }
 
-List<ToDoEntity> list = [];
+List<ToDoEntity> list = []; // list = ToDoEntity 객체들로 이루어진 리스트
 
 class ToDoView extends StatefulWidget {
-  ToDoView(this.empty, this.onEmptyChanged);
+  const ToDoView(this.empty, this.onEmptyChanged, {super.key});
 
   final bool empty;
   final void Function(bool empty) onEmptyChanged;
@@ -34,26 +34,25 @@ class _ToDoViewState extends State<ToDoView> {
       child: ListView.builder(
         itemCount: list.length,
         itemBuilder: (context, index) {
-          final todo = list[index];
+          final ToDoEntity todo = list[index]; // todo = ToDoEntity 각 객체들
           return ToDoBox(
             title: todo.title,
             description: todo.description,
             isFavorite: todo.isFavorite,
             isDone: todo.isDone,
             index: index,
-            onDeleted: () {
-              setState(() {});
-              widget.onEmptyChanged(list.isEmpty);
-            },
             onFavoriteChanged: () {
-              setState(() {
-                list[index].isFavorite = !list[index].isFavorite;
-              });
+              // todo 의 즐겨찾기 여부 상태변경 후 ToDoBox rebuild
+              setState(() => todo.isFavorite = !todo.isFavorite);
             },
             onDoneChanged: () {
-              setState(() {
-                list[index].isDone = !list[index].isDone;
-              });
+              // todo 의 완료 여부 상태변경 후 ToDoBox rebuild
+              setState(() => todo.isDone = !todo.isDone);
+            },
+            onDeleted: () {
+              // todo 삭제 후 ToDoBox rebuild > 빈 리스트 여부 확인 후 HomePage rebuild
+              setState(() {});
+              widget.onEmptyChanged(list.isEmpty);
             },
           );
         },

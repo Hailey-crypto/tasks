@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NoToDo extends StatelessWidget {
-  const NoToDo(this.mainTitle);
+  const NoToDo(this.mainTitle, {super.key});
 
   final String mainTitle;
 

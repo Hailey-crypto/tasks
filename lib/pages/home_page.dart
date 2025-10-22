@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import '../widgets/no_todo.dart';
-import '../widgets/todo_view.dart';
+import 'package:tasks/widgets/no_todo.dart';
+import 'package:tasks/widgets/todo_view.dart';
 import 'package:tasks/widgets/add_todo.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -13,6 +15,7 @@ class _HomePageState extends State<HomePage> {
 
   bool empty = list.isEmpty;
   void onEmptyChanged(bool newEmpty) {
+    // 빈 리스트 여부 확인 후 HomePage rebuild
     setState(() => empty = newEmpty);
   }
 

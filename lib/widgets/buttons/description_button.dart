@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tasks/widgets/buttons/save_button.dart';
 
 class DescriptionButton extends StatefulWidget {
-  DescriptionButton(this.spread, this.onSpreadChanged);
+  const DescriptionButton(this.spread, this.onSpreadChanged, {super.key});
 
   final bool spread;
   final void Function(bool spread) onSpreadChanged;
@@ -23,24 +23,36 @@ class _DescriptionButtonState extends State<DescriptionButton> {
   }
 }
 
-Widget DescriptionField(
-  BuildContext context,
-  onEmptyChanged,
-  titleController,
-  descriptionController,
-  isFavorite,
-) {
-  return TextField(
-    controller: descriptionController,
-    style: TextStyle(fontSize: 14),
-    maxLines: 5,
-    onSubmitted: (value) => saveToDo(
-      context,
-      onEmptyChanged,
-      titleController.text,
-      descriptionController.text,
-      isFavorite,
-    ),
-    decoration: InputDecoration(hintText: '세부정보 추가'),
-  );
+class DescriptionField extends StatelessWidget {
+  const DescriptionField({
+    super.key,
+    required this.context,
+    required this.onEmptyChanged,
+    required this.titleController,
+    required this.descriptionController,
+    required this.isFavorite,
+  });
+
+  final BuildContext context;
+  final void Function(bool) onEmptyChanged;
+  final TextEditingController titleController;
+  final TextEditingController descriptionController;
+  final bool isFavorite;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: descriptionController,
+      style: TextStyle(fontSize: 14),
+      maxLines: 5,
+      onSubmitted: (value) => saveToDo(
+        context: context,
+        onEmptyChanged: onEmptyChanged,
+        titleController: titleController,
+        descriptionController: descriptionController,
+        isFavorite: isFavorite,
+      ),
+      decoration: InputDecoration(hintText: '세부정보 추가'),
+    );
+  }
 }

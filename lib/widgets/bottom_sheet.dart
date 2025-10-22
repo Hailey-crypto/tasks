@@ -4,7 +4,7 @@ import 'package:tasks/widgets/buttons/favorite_button.dart';
 import 'package:tasks/widgets/buttons/save_button.dart';
 
 class BottomSheet extends StatefulWidget {
-  BottomSheet(this.empty, this.onEmptyChanged);
+  const BottomSheet(this.empty, this.onEmptyChanged, {super.key});
 
   final bool empty;
   final void Function(bool empty) onEmptyChanged;
@@ -16,11 +16,13 @@ class BottomSheet extends StatefulWidget {
 class _BottomSheetState extends State<BottomSheet> {
   bool spread = false;
   void onSpreadChanged(bool newSpread) {
+    // 세부내용 입력창 표시 여부 상태변경 후 BottomSheet rebuild
     setState(() => spread = newSpread);
   }
 
   bool isFavorite = false;
   void onFavoriteChanged() {
+    // 즐겨찾기 여부 상태변경 후 BottomSheet rebuild
     setState(() => isFavorite = !isFavorite);
   }
 
@@ -33,14 +35,14 @@ class _BottomSheetState extends State<BottomSheet> {
   void initState() {
     super.initState();
     titleController.addListener(() {
-      setState(() {
-        filled = titleController.text.isNotEmpty;
-      });
+      // title TextField 의 입력값 존재 여부 확인 후 BottomSheet rebuild
+      setState(() => filled = titleController.text.isNotEmpty);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    // 상태변경 시 BottomSheet 내부만 rebuild 하기 위한 위젯
     return StatefulBuilder(
       builder: (BuildContext context, StateSetter setState) {
         return SingleChildScrollView(
@@ -57,13 +59,14 @@ class _BottomSheetState extends State<BottomSheet> {
                 autofocus: true,
                 onSubmitted: (value) {
                   titleController.text.isEmpty
+                      // title TextField 입력값이 없을 때 스낵바 띄우는 기능 실행
                       ? snackBar(context)
                       : saveToDo(
-                          context,
-                          widget.onEmptyChanged,
-                          titleController,
-                          descriptionController,
-                          isFavorite,
+                          context: context,
+                          onEmptyChanged: widget.onEmptyChanged,
+                          titleController: titleController,
+                          descriptionController: descriptionController,
+                          isFavorite: isFavorite,
                         );
                 },
                 decoration: InputDecoration(
@@ -73,11 +76,11 @@ class _BottomSheetState extends State<BottomSheet> {
               ),
               spread
                   ? DescriptionField(
-                      context,
-                      widget.onEmptyChanged,
-                      titleController,
-                      descriptionController,
-                      isFavorite,
+                      context: context,
+                      onEmptyChanged: widget.onEmptyChanged,
+                      titleController: titleController,
+                      descriptionController: descriptionController,
+                      isFavorite: isFavorite,
                     )
                   : SizedBox.shrink(),
               Row(
@@ -86,11 +89,11 @@ class _BottomSheetState extends State<BottomSheet> {
                   FavoriteButton(isFavorite, onFavoriteChanged),
                   Spacer(),
                   SaveButton(
-                    widget.onEmptyChanged,
-                    filled,
-                    titleController,
-                    descriptionController,
-                    isFavorite,
+                    onEmptyChanged: widget.onEmptyChanged,
+                    filled: filled,
+                    titleController: titleController,
+                    descriptionController: descriptionController,
+                    isFavorite: isFavorite,
                   ),
                 ],
               ),

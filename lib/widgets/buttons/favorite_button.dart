@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FavoriteButton extends StatefulWidget {
-  FavoriteButton(this.isFavorite, this.onFavoriteChanged);
+  const FavoriteButton(this.isFavorite, this.onFavoriteChanged, {super.key});
 
   final bool isFavorite;
   final void Function() onFavoriteChanged;

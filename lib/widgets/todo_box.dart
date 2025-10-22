@@ -6,14 +6,15 @@ import 'package:tasks/widgets/delete_dialog.dart';
 
 class ToDoBox extends StatefulWidget {
   const ToDoBox({
+    super.key,
     required this.title,
     required this.description,
     required this.isFavorite,
     required this.isDone,
     required this.index,
-    required this.onDeleted,
     required this.onFavoriteChanged,
     required this.onDoneChanged,
+    required this.onDeleted,
   });
 
   final String title;
@@ -21,9 +22,9 @@ class ToDoBox extends StatefulWidget {
   final bool isFavorite;
   final bool isDone;
   final int index;
-  final void Function() onDeleted;
   final void Function() onFavoriteChanged;
   final void Function() onDoneChanged;
+  final void Function() onDeleted;
 
   @override
   State<ToDoBox> createState() => _ToDoBoxState();
@@ -33,18 +34,24 @@ class _ToDoBoxState extends State<ToDoBox> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: () =>
-          deleteDialog(context, widget.title, widget.index, widget.onDeleted),
+      // 길게 탭 : 나만의 기능(To Do 삭제 기능) 실행
+      onLongPress: () => deleteDialog(
+        context: context,
+        title: widget.title,
+        index: widget.index,
+        onDeleted: widget.onDeleted,
+      ),
+      // 짧게 탭 : ToDoDetailPage 로 이동
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
               return ToDoDetailPage(
-                widget.title,
-                widget.description,
-                widget.isFavorite,
-                widget.onFavoriteChanged,
+                title: widget.title,
+                description: widget.description,
+                isFavorite: widget.isFavorite,
+                onFavoriteChanged: widget.onFavoriteChanged,
               );
             },
           ),

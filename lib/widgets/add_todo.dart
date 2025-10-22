@@ -2,7 +2,7 @@ import 'package:flutter/material.dart' hide BottomSheet;
 import 'package:tasks/widgets/bottom_sheet.dart';
 
 class AddToDo extends StatelessWidget {
-  AddToDo(this.empty, this.onEmptyChanged);
+  const AddToDo(this.empty, this.onEmptyChanged, {super.key});
 
   final bool empty;
   final void Function(bool empty) onEmptyChanged;
@@ -27,6 +27,7 @@ class AddToDo extends StatelessWidget {
   }
 }
 
+// BottomSheet 를 화면에 띄워주는 함수
 addToDo(context, empty, onEmptyChanged) {
   return showModalBottomSheet(
     isScrollControlled: true,

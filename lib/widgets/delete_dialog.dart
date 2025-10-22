@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:tasks/widgets/todo_view.dart';
 
-deleteDialog(context, title, index, onDelete) {
+deleteDialog({
+  required BuildContext context,
+  required String title,
+  required int index,
+  required void Function() onDeleted,
+}) {
   return showCupertinoDialog(
     context: context,
     builder: (context) {
@@ -16,7 +21,7 @@ deleteDialog(context, title, index, onDelete) {
           ),
           CupertinoDialogAction(
             isDefaultAction: true,
-            onPressed: () => deleteToDo(context, index, onDelete),
+            onPressed: () => deleteToDo(context, index, onDeleted),
             child: Text('확인'),
           ),
         ],
@@ -25,6 +30,7 @@ deleteDialog(context, title, index, onDelete) {
   );
 }
 
+// todo 를 삭제하는 함수
 deleteToDo(context, index, onDelete) {
   list.removeAt(index);
   Navigator.pop(context);

@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:tasks/widgets/buttons/favorite_button.dart';
 
 class ToDoDetailPage extends StatefulWidget {
-  ToDoDetailPage(
-    this.title,
-    this.description,
-    this.isFavorite,
-    this.onFavoriteChanged,
-  );
+  const ToDoDetailPage({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.isFavorite,
+    required this.onFavoriteChanged,
+  });
 
   final String title;
   final String? description;
@@ -64,7 +65,7 @@ Widget detailBox(description) {
       Icon(Icons.short_text_rounded),
       Expanded(
         child: Text(
-          description == null ? SizedBox.shrink() : description,
+          description ?? SizedBox.shrink(),
           style: TextStyle(fontSize: 17),
         ),
       ),

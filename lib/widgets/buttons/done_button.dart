@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DoneButton extends StatefulWidget {
-  DoneButton(this.isDone, this.onDoneChanged);
+  const DoneButton(this.isDone, this.onDoneChanged, {super.key});
 
   final bool isDone;
   final void Function() onDoneChanged;

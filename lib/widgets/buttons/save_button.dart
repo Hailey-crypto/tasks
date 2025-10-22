@@ -3,13 +3,14 @@ import 'package:tasks/theme.dart';
 import 'package:tasks/widgets/todo_view.dart';
 
 class SaveButton extends StatelessWidget {
-  SaveButton(
-    this.onEmptyChanged,
-    this.filled,
-    this.titleController,
-    this.descriptionController,
-    this.isFavorite,
-  );
+  const SaveButton({
+    super.key,
+    required this.onEmptyChanged,
+    required this.filled,
+    required this.titleController,
+    required this.descriptionController,
+    required this.isFavorite,
+  });
 
   final void Function(bool empty) onEmptyChanged;
   final bool filled;
@@ -23,11 +24,11 @@ class SaveButton extends StatelessWidget {
       style: TextButton.styleFrom(foregroundColor: filled ? blue : Colors.grey),
       onPressed: () => filled
           ? saveToDo(
-              context,
-              onEmptyChanged,
-              titleController,
-              descriptionController,
-              isFavorite,
+              context: context,
+              onEmptyChanged: onEmptyChanged,
+              titleController: titleController,
+              descriptionController: descriptionController,
+              isFavorite: isFavorite,
             )
           : null,
       child: Text('저장'),
@@ -35,13 +36,14 @@ class SaveButton extends StatelessWidget {
   }
 }
 
-saveToDo(
-  context,
-  onEmptyChanged,
-  titleController,
-  descriptionController,
-  isFavorite,
-) {
+// todo 를 생성하는 함수
+saveToDo({
+  required BuildContext context,
+  required void Function(bool) onEmptyChanged,
+  required TextEditingController titleController,
+  required TextEditingController descriptionController,
+  required bool isFavorite,
+}) {
   list.add(
     ToDoEntity(
       title: titleController.text,
@@ -54,6 +56,7 @@ saveToDo(
   onEmptyChanged(false);
 }
 
+// 스낵바를 띄우는 함수
 snackBar(context) {
   Navigator.pop(context);
   ScaffoldMessenger.of(context).showSnackBar(
