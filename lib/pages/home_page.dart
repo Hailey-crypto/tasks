@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             empty ? NoToDo(mainTitle) : ToDoView(empty, onEmptyChanged),
             AddToDo(empty, onEmptyChanged),

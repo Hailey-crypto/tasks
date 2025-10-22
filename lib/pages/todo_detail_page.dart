@@ -37,10 +37,12 @@ class _ToDoDetailPageState extends State<ToDoDetailPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 10,
-          children: [titleBox(widget.title), detailBox(widget.description)],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 10,
+            children: [titleBox(widget.title), detailBox(widget.description)],
+          ),
         ),
       ),
     );
