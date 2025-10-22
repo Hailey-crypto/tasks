@@ -5,6 +5,8 @@ Just To Do
   <img alt="title" src="./assets/readme_title.webp"/>
 </p>
 
+<br/>
+
 ## 🔖 프로젝트 개요
 ### “Just To Do" 는 누구나 손쉽게 사용 가능한 To Do List 입니다.
 
@@ -41,25 +43,25 @@ Just To Do
 ## 📂 프로젝트 구조
 <pre>
 lib/
- ㄴ main : 메인 실행 파일
+ ㄴ main  : 메인 실행 파일
  ㄴ theme : 앱 전체의 테마 지정 (라이트/다크 모드 지원)
  ㄴ pages/
-     ㄴ home_page    : 앱 실행 시 첫 화면
-     ㄴ todo_detail_page    : To Do 의 제목과 세부 내용을 확인할 수 있는 화면 / titleBox, detailBox
+     ㄴ home_page               : 앱 실행 시 첫 화면
+     ㄴ todo_detail_page        : To Do 의 제목과 세부 내용을 확인할 수 있는 화면 / titleBox, detailBox
  ㄴ widgets/
-     ㄴ add_todo     : AddTodo, addToDo()
-     ㄴ bottom_sheet    : BottomSheet
-     ㄴ delete_dialog   : deleteDialog(), deleteToDo()
-     ㄴ no_todo     : NoToDo
-     ㄴ todo_box    : ToDoBox
-     ㄴ todo_view   : class ToDoEntity, List<ToDoEntity> list, ToDoView
+     ㄴ add_todo                : AddTodo, addToDo()
+     ㄴ bottom_sheet            : BottomSheet
+     ㄴ delete_dialog           : deleteDialog(), deleteToDo()
+     ㄴ no_todo                 : NoToDo
+     ㄴ todo_box                : ToDoBox
+     ㄴ todo_view               : class ToDoEntity, List<ToDoEntity> list, ToDoView
      ㄴ buttons/
-         ㄴ back_button     : BackButton
+         ㄴ back_button         : BackButton
          ㄴ description_button  : DescriptionButton, DescriptionField
-         ㄴ done_button     : DoneButton
+         ㄴ done_button         : DoneButton
          ㄴ favorite_button     : FavoriteButton
-         ㄴ save_button     : SaveButton, saveToDo(), snackBar()
-assets/ : 앱 내에서 사용된 이미지 파일
+         ㄴ save_button         : SaveButton, saveToDo(), snackBar()
+assets/   : 앱 내에서 사용된 이미지 파일
 README.md : 프로젝트 설명 문서
 </pre>
 
